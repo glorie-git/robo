@@ -1,15 +1,38 @@
+import { useState } from "react";
 import "./App.css";
 
 function Square({ value, id }) {
   return (
     <div className="square">
-      <div className="container" id={id}>
+      <div className="container" id={id} style={{ transform: `rotate(0deg)` }}>
         {value}
       </div>
     </div>
   );
 }
+
 function App() {
+  const [rotate, setRotate] = useState(0);
+
+  function handleClick(value) {
+    console.log(value);
+
+    const element = document.getElementById(12);
+    if (value === "left") {
+      const rotation = (rotate - 90) % 360;
+      element.style.transform = `rotate(${rotation}deg)`;
+
+      setRotate(rotation);
+    } else if (value === "right") {
+      const rotation = (rotate + 90) % 360;
+      element.style.transform = `rotate(${rotation}deg)`;
+
+      setRotate(rotation);
+    } else if (value === "forward") {
+      // Move forward
+    }
+  }
+
   return (
     <>
       <div className="tabletop">
@@ -49,7 +72,11 @@ function App() {
           <Square value="" id="24" />
         </div>
       </div>
-      <div className="controls"></div>
+      <div className="controls">
+        <button onClick={() => handleClick("left")}>Rotate Left</button>
+        <button onClick={() => handleClick("forward")}>Forward</button>
+        <button onClick={() => handleClick("right")}>Rotate Right</button>
+      </div>
     </>
   );
 }
