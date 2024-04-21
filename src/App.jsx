@@ -12,12 +12,14 @@ function Square({ value, id }) {
 }
 
 function App() {
+  const startingLocation = 12;
   const [rotate, setRotate] = useState(0);
+  const [location, setLocation] = useState(startingLocation);
 
   function handleClick(value) {
     console.log(value);
 
-    const element = document.getElementById(12);
+    const element = document.getElementById(location);
     if (value === "left") {
       const rotation = (rotate - 90) % 360;
       element.style.transform = `rotate(${rotation}deg)`;
@@ -30,6 +32,26 @@ function App() {
       setRotate(rotation);
     } else if (value === "forward") {
       // Move forward
+
+      let newLocation;
+      if (rotate === 0) {
+        newLocation = location - 5;
+      } else if (rotate === 90) {
+        newLocation = location + 1;
+      } else if (rotate === -90) {
+        newLocation = location - 1;
+      } else if (rotate === 180 || rotate === -180) {
+        newLocation = location + 5;
+      }
+
+      element.innerText = "";
+
+      const newElement = document.getElementById(newLocation);
+      newElement.innerText = "R";
+
+      console.log("New location: " + newLocation);
+
+      setLocation(newLocation);
     }
   }
 
