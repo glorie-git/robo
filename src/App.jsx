@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import "./App.css";
 import Square from "./components/Square";
+import Controller from "./components/Controller";
 
 function generateTargetLocation(roboLocation) {
   const newTargetLocation = Math.floor(Math.random() * 25);
@@ -152,17 +153,11 @@ function App() {
                 <div className="tabletop">
                   {createTabletop(5, 5, roboLocation)}
                 </div>
-                <div className="controls">
-                  <button onClick={() => handleClick("left")}>
-                    Rotate Left
-                  </button>
-                  <button onClick={() => handleClick("forward")}>
-                    Forward
-                  </button>
-                  <button onClick={() => handleClick("right")}>
-                    Rotate Right
-                  </button>
-                </div>
+                <div className="controls"></div>
+                <Controller
+                  handleClick={handleClick}
+                  buttons={["left", "forward", "right"]}
+                />
               </div>
             )}
           </div>
