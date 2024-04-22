@@ -21,3 +21,12 @@
   display: flex;
   flex-direction: row;
 }
+
+.space {
+  justify-content: space-between;
+}
+
+#game {
+  width: 50%;
+  height: 50%;
+}

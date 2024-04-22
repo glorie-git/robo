@@ -17,6 +17,7 @@ let targetLocation = null;
 // Paramter: rows and cols
 // Retun: A 2D array
 function createTabletop(rows, cols, roboLocation) {
+  console.log("In tabletop.");
   let row = [];
   let rowIndex = 0;
 
@@ -56,6 +57,7 @@ function App() {
   // TODO: Does not need to be a state variable
   let roboLocation = startingLocation;
   const [points, setPoints] = useState(0);
+  const [timeUp, setTimeUp] = useState(false);
 
   useEffect(() => {
     if (roboLocation === targetLocation) {
@@ -70,6 +72,26 @@ function App() {
       targetLocation = newTargetLocation;
     }
   }, [roboLocation]);
+
+  // Game timer
+  // Thanks to https://codesandbox.io/p/sandbox/simple-react-countdown-timer-forked-ztxcnx?file=%2Fsrc%2FApp.js%3A5%2C3-19%2C79
+  const [time, setTime] = useState(10);
+
+  useEffect(() => {
+    let timer = setInterval(() => {
+      setTime((time) => {
+        if (time === 0) {
+          clearInterval(timer);
+          console.log("Time is up!");
+          setTimeUp(true);
+          return 0;
+        } else return time - 1;
+      });
+    }, 1000);
+
+    // Cleanup function to clear the interval
+    return () => clearInterval(timer);
+  }, []); // Empty dependency array to run only once when the component mounts
 
   function handleClick(value) {
     console.log(value);
@@ -110,14 +132,29 @@ function App() {
 
   return (
     <>
-      <div>Score: {points}</div>
-      <div className="tabletop">
-        <div>{createTabletop(5, 5, roboLocation)}</div>
-      </div>
-      <div className="controls">
-        <button onClick={() => handleClick("left")}>Rotate Left</button>
-        <button onClick={() => handleClick("forward")}>Forward</button>
-        <button onClick={() => handleClick("right")}>Rotate Right</button>
+      <div id="game">
+        <div className="grid-row space">
+          <div>Score: {points}</div>
+          <div>Timer: {time}</div>
+        </div>
+        <div>
+          {timeUp ? (
+            <h1>Game Over</h1>
+          ) : (
+            <div>
+              <div className="tabletop">
+                {createTabletop(5, 5, roboLocation)}
+              </div>
+              <div className="controls">
+                <button onClick={() => handleClick("left")}>Rotate Left</button>
+                <button onClick={() => handleClick("forward")}>Forward</button>
+                <button onClick={() => handleClick("right")}>
+                  Rotate Right
+                </button>
+              </div>
+            </div>
+          )}
+        </div>
       </div>
     </>
   );
