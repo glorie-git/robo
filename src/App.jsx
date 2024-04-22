@@ -55,6 +55,7 @@ function createTabletop(rows, cols, roboLocation) {
     );
     rowIndex++;
   }
+
   return row;
 }
 
@@ -63,10 +64,14 @@ function App() {
   const startingLocation = 12;
   // TODO: Does not need to be a state variable
   const [location, setLocation] = useState(startingLocation);
+  const [points, setPoints] = useState(0);
 
   useEffect(() => {
     if (location === targetLocation) {
       console.log("Target found.");
+      // increment points
+      setPoints(points + 1);
+
       // generate new target location
       const newTargetLocation = generateTargetLocation(location);
 
@@ -114,6 +119,7 @@ function App() {
 
   return (
     <>
+      <div>Score: {points}</div>
       <div className="tabletop">
         <div>{createTabletop(5, 5, location)}</div>
       </div>
