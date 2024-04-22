@@ -55,7 +55,8 @@ function App() {
   const [rotate, setRotate] = useState(0);
   const startingLocation = 12;
   // TODO: Does not need to be a state variable
-  let roboLocation = startingLocation;
+  // let roboLocation = startingLocation;
+  const [roboLocation, setRoboLocation] = useState(startingLocation);
   const [points, setPoints] = useState(0);
   const [timeUp, setTimeUp] = useState(false);
   const [leaderboard, setLeaderboard] = useState([
@@ -131,7 +132,7 @@ function App() {
       newElement.innerText = "R";
       newElement.style.transform = `rotate(${rotate}deg)`;
 
-      roboLocation = newLocation;
+      setRoboLocation(newLocation);
     }
   }
 
