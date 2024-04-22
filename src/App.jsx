@@ -60,11 +60,10 @@ function App() {
   const [roboLocation, setRoboLocation] = useState(startingLocation);
   const [points, setPoints] = useState(0);
   const [timeUp, setTimeUp] = useState(false);
-  const [leaderboard, setLeaderboard] = useState([
-    ["player4", "100"],
-    ["player6", "105"],
-    ["player9", "101"],
-  ]);
+
+  const [leaderboard, setLeaderboard] = useState(
+    JSON.parse(localStorage.getItem("games")),
+  );
 
   useEffect(() => {
     if (roboLocation === targetLocation) {
@@ -153,11 +152,12 @@ function App() {
                 <div className="tabletop">
                   {createTabletop(5, 5, roboLocation)}
                 </div>
-                <div className="controls"></div>
-                <Controller
-                  handleClick={handleClick}
-                  buttons={["left", "forward", "right"]}
-                />
+                <div className="controls">
+                  <Controller
+                    handleClick={handleClick}
+                    buttons={["left", "forward", "right"]}
+                  />
+                </div>
               </div>
             )}
           </div>
