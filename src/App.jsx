@@ -75,23 +75,23 @@ function App() {
 
   // Game timer
   // Thanks to https://codesandbox.io/p/sandbox/simple-react-countdown-timer-forked-ztxcnx?file=%2Fsrc%2FApp.js%3A5%2C3-19%2C79
-  const [time, setTime] = useState(10);
+  const [time, setTime] = useState(60);
 
-  useEffect(() => {
-    let timer = setInterval(() => {
-      setTime((time) => {
-        if (time === 0) {
-          clearInterval(timer);
-          console.log("Time is up!");
-          setTimeUp(true);
-          return 0;
-        } else return time - 1;
-      });
-    }, 1000);
+  // useEffect(() => {
+  //   let timer = setInterval(() => {
+  //     setTime((time) => {
+  //       if (time === 0) {
+  //         clearInterval(timer);
+  //         console.log("Time is up!");
+  //         setTimeUp(true);
+  //         return 0;
+  //       } else return time - 1;
+  //     });
+  //   }, 1000);
 
-    // Cleanup function to clear the interval
-    return () => clearInterval(timer);
-  }, []); // Empty dependency array to run only once when the component mounts
+  //   // Cleanup function to clear the interval
+  //   return () => clearInterval(timer);
+  // }, []); // Empty dependency array to run only once when the component mounts
 
   function handleClick(value) {
     console.log(value);
