@@ -58,6 +58,11 @@ function App() {
   let roboLocation = startingLocation;
   const [points, setPoints] = useState(0);
   const [timeUp, setTimeUp] = useState(false);
+  const [leaderboard, setLeaderboard] = useState([
+    ["player4", "100"],
+    ["player6", "105"],
+    ["player9", "101"],
+  ]);
 
   useEffect(() => {
     if (roboLocation === targetLocation) {
@@ -133,27 +138,56 @@ function App() {
   return (
     <>
       <div id="game">
-        <div className="grid-row space">
-          <div>Score: {points}</div>
-          <div>Timer: {time}</div>
-        </div>
         <div>
-          {timeUp ? (
-            <h1>Game Over</h1>
-          ) : (
-            <div>
-              <div className="tabletop">
-                {createTabletop(5, 5, roboLocation)}
+          <div className="grid-row space">
+            <div>Score: {points}</div>
+            <div>Timer: {time}</div>
+          </div>
+          <div>
+            {timeUp ? (
+              <h1>Game Over</h1>
+            ) : (
+              <div>
+                <div className="tabletop">
+                  {createTabletop(5, 5, roboLocation)}
+                </div>
+                <div className="controls">
+                  <button onClick={() => handleClick("left")}>
+                    Rotate Left
+                  </button>
+                  <button onClick={() => handleClick("forward")}>
+                    Forward
+                  </button>
+                  <button onClick={() => handleClick("right")}>
+                    Rotate Right
+                  </button>
+                </div>
               </div>
-              <div className="controls">
-                <button onClick={() => handleClick("left")}>Rotate Left</button>
-                <button onClick={() => handleClick("forward")}>Forward</button>
-                <button onClick={() => handleClick("right")}>
-                  Rotate Right
-                </button>
-              </div>
-            </div>
-          )}
+            )}
+          </div>
+        </div>
+
+        <div id="board">
+          <h2>Leaderboard</h2>
+          <ul>
+            {leaderboard
+              .sort((a, b) => {
+                if (a[1] < b[1]) {
+                  return 1;
+                } else if (a[1] > b[1]) {
+                  return -1;
+                }
+
+                return 0;
+              })
+              .map((leader) => {
+                return (
+                  <li key={leader}>
+                    {leader[0]} {leader[1]}
+                  </li>
+                );
+              })}
+          </ul>
         </div>
       </div>
     </>
