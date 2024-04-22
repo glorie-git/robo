@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import "./App.css";
 import Square from "./components/Square";
 import Controller from "./components/Controller";
+import Leaderboard from "./components/Leaderboard";
 
 function generateTargetLocation(roboLocation) {
   const newTargetLocation = Math.floor(Math.random() * 25);
@@ -60,6 +61,7 @@ function App() {
   const [roboLocation, setRoboLocation] = useState(startingLocation);
   const [points, setPoints] = useState(0);
   const [timeUp, setTimeUp] = useState(false);
+  const [currentPlayer, setCurrentPlayer] = useState(null);
 
   const [leaderboard, setLeaderboard] = useState(
     JSON.parse(localStorage.getItem("games")),
@@ -164,26 +166,7 @@ function App() {
         </div>
 
         <div id="board">
-          <h2>Leaderboard</h2>
-          <ul>
-            {leaderboard
-              .sort((a, b) => {
-                if (a[1] < b[1]) {
-                  return 1;
-                } else if (a[1] > b[1]) {
-                  return -1;
-                }
-
-                return 0;
-              })
-              .map((leader) => {
-                return (
-                  <li key={leader}>
-                    {leader[0]} {leader[1]}
-                  </li>
-                );
-              })}
-          </ul>
+          <Leaderboard leaderboard={leaderboard} />
         </div>
       </div>
     </>
