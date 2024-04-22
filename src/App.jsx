@@ -1,15 +1,6 @@
 import { useState, useEffect } from "react";
 import "./App.css";
-
-function Square({ value, id }) {
-  return (
-    <div className="square">
-      <div className="container" id={id} style={{ transform: `rotate(0deg)` }}>
-        {value}
-      </div>
-    </div>
-  );
-}
+import Square from "./components/Square";
 
 function generateTargetLocation(location) {
   const newTargetLocation = Math.floor(Math.random() * 25);
