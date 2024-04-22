@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "./App.css";
 
 function Square({ value, id }) {
@@ -28,6 +28,18 @@ function App() {
   }
 
   const [targetLocation, setTargetLocation] = useState(getTargetLocation());
+  const [points, setPoints] = useState(0);
+
+  useEffect(() => {
+    if (location === targetLocation) {
+      console.log("Target found.");
+      // increment points
+      setPoints(points + 1);
+
+      // generate new target location
+      // const
+    }
+  }, [location]);
 
   function handleClick(value) {
     console.log(value);
@@ -105,6 +117,7 @@ function App() {
 
   return (
     <>
+      <div>Score: {points}</div>
       <div className="tabletop">
         <div>{createTabletop(5, 5)}</div>
       </div>
