@@ -2,12 +2,12 @@ import { useState, useEffect } from "react";
 import "./App.css";
 import Square from "./components/Square";
 
-function generateTargetLocation(location) {
+function generateTargetLocation(roboLocation) {
   const newTargetLocation = Math.floor(Math.random() * 25);
-  if (newTargetLocation !== location) {
+  if (newTargetLocation !== roboLocation) {
     return newTargetLocation;
   } else {
-    return generateTargetLocation(location);
+    return generateTargetLocation(roboLocation);
   }
 }
 
@@ -54,27 +54,27 @@ function App() {
   const [rotate, setRotate] = useState(0);
   const startingLocation = 12;
   // TODO: Does not need to be a state variable
-  const [location, setLocation] = useState(startingLocation);
+  let roboLocation = startingLocation;
   const [points, setPoints] = useState(0);
 
   useEffect(() => {
-    if (location === targetLocation) {
+    if (roboLocation === targetLocation) {
       console.log("Target found.");
       // increment points
       setPoints(points + 1);
 
-      // generate new target location
-      const newTargetLocation = generateTargetLocation(location);
+      // generate new target roboLocation
+      const newTargetLocation = generateTargetLocation(roboLocation);
 
       // // setTargetLocation(newTargetLocation);
       targetLocation = newTargetLocation;
     }
-  }, [location]);
+  }, [roboLocation]);
 
   function handleClick(value) {
     console.log(value);
 
-    const element = document.getElementById(location);
+    const element = document.getElementById(roboLocation);
     if (value === "left") {
       const rotation = (rotate - 90) % 360;
       element.style.transform = `rotate(${rotation}deg)`;
@@ -89,13 +89,13 @@ function App() {
       let newLocation;
 
       if (rotate === 0) {
-        newLocation = location - 5;
+        newLocation = roboLocation - 5;
       } else if (rotate === 90 || rotate === -270) {
-        newLocation = location + 1;
+        newLocation = roboLocation + 1;
       } else if (rotate === -90 || rotate === 270) {
-        newLocation = location - 1;
+        newLocation = roboLocation - 1;
       } else if (rotate === 180 || rotate === -180) {
-        newLocation = location + 5;
+        newLocation = roboLocation + 5;
       }
 
       element.innerText = "";
@@ -104,7 +104,7 @@ function App() {
       newElement.innerText = "R";
       newElement.style.transform = `rotate(${rotate}deg)`;
 
-      setLocation(newLocation);
+      roboLocation = newLocation;
     }
   }
 
@@ -112,7 +112,7 @@ function App() {
     <>
       <div>Score: {points}</div>
       <div className="tabletop">
-        <div>{createTabletop(5, 5, location)}</div>
+        <div>{createTabletop(5, 5, roboLocation)}</div>
       </div>
       <div className="controls">
         <button onClick={() => handleClick("left")}>Rotate Left</button>
