@@ -34,6 +34,7 @@ function App() {
       // Move forward
 
       let newLocation;
+
       if (rotate === 0) {
         newLocation = location - 5;
       } else if (rotate === 90) {
@@ -45,9 +46,11 @@ function App() {
       }
 
       element.innerText = "";
+      element.style.transform = `rotate(0deg)`;
 
       const newElement = document.getElementById(newLocation);
       newElement.innerText = "R";
+      newElement.style.transform = `rotate(${rotate}deg)`;
 
       console.log("New location: " + newLocation);
 
