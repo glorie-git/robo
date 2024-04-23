@@ -1,4 +1,4 @@
-# Robo
+# Robo &middot; [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/glorie-git/robo/blob/main/LICENSE.md)
 Robo is a web browser game where the player helps help reach all the targets before time runs out. But be careful, you might fall off the table top!
 
 ## Motivation
