@@ -38,7 +38,7 @@ Contribute and suggestions are welcome!
 
 ## Credits
 - [Tutorial: Tic-Tac-Toe](https://react.dev/learn/tutorial-tic-tac-toe)
-- [Simple React Countdown Timer] (https://codesandbox.io/p/sandbox/simple-react-countdown-timer-zdzwy?file=%2Fsrc%2FApp.js)
+- [Simple React Countdown Timer](https://codesandbox.io/p/sandbox/simple-react-countdown-timer-zdzwy?file=%2Fsrc%2FApp.js)
 
 ## License
 MIT License
