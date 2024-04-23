@@ -24,7 +24,7 @@ Help Robo navigate throught on the tabletop using the controls at the bottom. Re
 ![](https://github.com/glorie-git/robo/blob/main/resources/ROBOGAMEPLACE-ezgif.com-video-to-gif-converter.gif)
 
 ## How to Run Game
-Make sure you have followed the steps in [Installation](#installation). To run the game open the terminal and run the following command:
+Make sure you have followed the steps in [installation](#installation). To run the game open the terminal and run the following command:
 ```
 $ npm run dev
 ```
