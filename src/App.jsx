@@ -19,6 +19,8 @@ function App() {
   const [timeUp, setTimeUp] = useState(false);
   const [input, setInput] = useState("");
   const [isRunning, setIsRunning] = useState(true);
+  const [time, setTime] = useState(gameLength);
+  const [leaderboard, setLeaderboard] = useState(null);
 
   function generateTargetLocation(roboLocation) {
     const newTargetLocation = Math.floor(Math.random() * 25);
@@ -29,35 +31,25 @@ function App() {
     }
   }
 
-  const [leaderboard, setLeaderboard] = useState(null);
-
   function getLeaderboard() {
     return JSON.parse(localStorage.getItem(localStorageKey));
   }
 
   useEffect(() => {
-    const games = getLeaderboard();
-    setLeaderboard(games);
+    setLeaderboard(getLeaderboard());
   }, []);
 
   useEffect(() => {
     if (roboLocation === targetLocation) {
       console.log("Target found.");
-      // increment points
-      setPoints(points + 1);
-
-      // generate new target roboLocation
-      const newTargetLocation = generateTargetLocation(roboLocation);
-
-      // // setTargetLocation(newTargetLocation);
+      setPoints(points + 1); // increment points
+      const newTargetLocation = generateTargetLocation(roboLocation); // generate new target roboLocation
       targetLocation = newTargetLocation;
     }
   }, [roboLocation]);
 
   // Game timer
   // Thanks to https://codesandbox.io/p/sandbox/simple-react-countdown-timer-forked-ztxcnx?file=%2Fsrc%2FApp.js%3A5%2C3-19%2C79
-  const [time, setTime] = useState(gameLength);
-
   useEffect(() => {
     let timer = setInterval(() => {
       setTime((time) => {
@@ -156,12 +148,22 @@ function App() {
   function submitPoints(e) {
     e.preventDefault();
 
-    let games = JSON.parse(localStorage.getItem("games"));
-    games.push([input, `${points}`]);
-    localStorage.setItem("games", JSON.stringify(games));
-    console.log(JSON.parse(localStorage.getItem("games")));
+    const games = getLeaderboard();
 
-    setLeaderboard(games);
+    if (games) {
+      console.log(games);
+      games.push([input, `${points}`]);
+      localStorage.setItem(localStorageKey, JSON.stringify(games));
+    } else {
+      localStorage.setItem(
+        localStorageKey,
+        JSON.stringify([[input, `${points}`]]),
+      );
+    }
+
+    const updatedGames = getLeaderboard();
+
+    setLeaderboard(updatedGames);
     console.log("Game submitted.");
     setInput("");
 
