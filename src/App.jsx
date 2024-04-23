@@ -19,7 +19,6 @@ let targetLocation = null;
 // Paramter: rows and cols
 // Retun: A 2D array
 function createTabletop(rows, cols, roboLocation) {
-  console.log("In tabletop.");
   let row = [];
   let rowIndex = 0;
 
@@ -54,14 +53,24 @@ function createTabletop(rows, cols, roboLocation) {
 }
 
 function App() {
-  const [rotate, setRotate] = useState(0);
   const startingLocation = 12;
-  // TODO: Does not need to be a state variable
-  // let roboLocation = startingLocation;
+  const gameLength = 60;
+
+  const [rotate, setRotate] = useState(0);
   const [roboLocation, setRoboLocation] = useState(startingLocation);
   const [points, setPoints] = useState(0);
   const [timeUp, setTimeUp] = useState(false);
-  const [currentPlayer, setCurrentPlayer] = useState(null);
+  const [input, setInput] = useState("");
+  const [isRunning, setIsRunning] = useState(true);
+
+  // PRELOAD DATA TO LOCALSTORAGE
+  // const data = [
+  //   ["player12", "21"],
+  //   ["player24", "59"],
+  //   ["player2", "31"],
+  // ];
+
+  // localStorage.setItem("games", JSON.stringify(data));
 
   const [leaderboard, setLeaderboard] = useState(
     JSON.parse(localStorage.getItem("games")),
@@ -83,7 +92,7 @@ function App() {
 
   // Game timer
   // Thanks to https://codesandbox.io/p/sandbox/simple-react-countdown-timer-forked-ztxcnx?file=%2Fsrc%2FApp.js%3A5%2C3-19%2C79
-  const [time, setTime] = useState(60);
+  const [time, setTime] = useState(gameLength);
 
   useEffect(() => {
     let timer = setInterval(() => {
@@ -91,6 +100,7 @@ function App() {
         if (time === 0) {
           clearInterval(timer);
           console.log("Time is up!");
+          setIsRunning(false);
           setTimeUp(true);
           return 0;
         } else return time - 1;
@@ -99,7 +109,7 @@ function App() {
 
     // Cleanup function to clear the interval
     return () => clearInterval(timer);
-  }, []); // Empty dependency array to run only once when the component mounts
+  }, [isRunning]); // Empty dependency array to run only once when the component mounts
 
   function handleClick(value) {
     console.log(value);
@@ -133,9 +143,39 @@ function App() {
       const newElement = document.getElementById(newLocation);
       newElement.innerText = "R";
       newElement.style.transform = `rotate(${rotate}deg)`;
-
       setRoboLocation(newLocation);
     }
+  }
+
+  function submitPoints(e) {
+    e.preventDefault();
+
+    let games = JSON.parse(localStorage.getItem("games"));
+    games.push([input, `${points}`]);
+    localStorage.setItem("games", JSON.stringify(games));
+    console.log(JSON.parse(localStorage.getItem("games")));
+
+    setLeaderboard(games);
+    console.log("Game submitted.");
+    setInput("");
+
+    const element = document.getElementById("points-form");
+    element.style.display = "none";
+  }
+
+  function handleChange(e) {
+    const input = e.target.value;
+    setInput(input);
+  }
+
+  function handlePlayClick() {
+    // RESET GAME
+    setPoints(0);
+    setTimeUp(false);
+    setRoboLocation(startingLocation);
+    setTime(gameLength);
+    setRotate(0);
+    setIsRunning(true);
   }
 
   return (
@@ -148,7 +188,19 @@ function App() {
           </div>
           <div>
             {timeUp ? (
-              <h1>Game Over</h1>
+              <div>
+                <h1>Game Over</h1>
+                <form id="points-form" onSubmit={submitPoints}>
+                  <p>Enter a name below to save your score.</p>
+                  <input
+                    value={input}
+                    placeholder="Enter a name"
+                    onChange={handleChange}
+                  />
+                  <button type="submit">Save</button>
+                </form>
+                <button onClick={handlePlayClick}>Play</button>
+              </div>
             ) : (
               <div>
                 <div className="tabletop">
