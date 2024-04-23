@@ -30,7 +30,7 @@ This basically explains the current build status of the project. If there is a b
 ## Bugs
 1. None so far.
 
-## Tech/Framework used
+## Framework(s)
 - React + Vite
 
 ## Contribute
