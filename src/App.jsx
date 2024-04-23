@@ -111,6 +111,13 @@ function App() {
     return () => clearInterval(timer);
   }, [isRunning]); // Empty dependency array to run only once when the component mounts
 
+  // Stop timer when game is over
+  useEffect(() => {
+    if (timeUp) {
+      setTime(0);
+    }
+  }, [timeUp]);
+
   function handleClick(value) {
     console.log(value);
 
@@ -138,12 +145,47 @@ function App() {
         newLocation = roboLocation + 5;
       }
 
-      element.innerText = "";
-      element.style.transform = "rotate(0deg)";
-      const newElement = document.getElementById(newLocation);
-      newElement.innerText = "R";
-      newElement.style.transform = `rotate(${rotate}deg)`;
-      setRoboLocation(newLocation);
+      let isTimeUp = false;
+
+      if (newLocation < 0) {
+        // Robo has fallen off the top edge
+        console.log("Fallen off the top.");
+        isTimeUp = true;
+        setTimeUp(isTimeUp);
+      } else if (newLocation > 25) {
+        // Robo has fallen off the bottom edge
+        console.log("Fallen off the bottom.");
+        isTimeUp = true;
+        setTimeUp(isTimeUp);
+      } else if (roboLocation % 5 === 0) {
+        // Robo is at the left edge
+        if (rotate === -90 || rotate === 270) {
+          // Falls off on left edge
+          console.log("Fallen off left edge.");
+          isTimeUp = true;
+          setTimeUp(isTimeUp);
+        }
+      } else if (roboLocation % 5 === 4) {
+        // Robo is at the right edge
+        if (rotate === 90 || rotate === -270) {
+          // Falls off on right edge
+          console.log("Fallen off right edge.");
+          isTimeUp = true;
+          setTimeUp(isTimeUp);
+        }
+      }
+
+      if (!timeUp) {
+        element.innerText = "";
+        element.style.transform = "rotate(0deg)";
+        const newElement = document.getElementById(newLocation);
+
+        if (newElement) {
+          newElement.innerText = "R";
+          newElement.style.transform = `rotate(${rotate}deg)`;
+          setRoboLocation(newLocation);
+        }
+      }
     }
   }
 
