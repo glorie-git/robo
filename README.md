@@ -20,8 +20,8 @@ Help Robo navigate throught on the tabletop using the controls at the bottom.
 ![]([https://github.com/Your_Repository_Name/Your_GIF_Name.gif](https://github.com/glorie-git/robo/blob/main/resources/ROBOGAMEPLACE-ezgif.com-video-to-gif-converter.gif))
 
 ## How to Play?
-Make sure you have followed the steps in [Installation](#installation)
-To run the game open the terminal and run *npm run dev*
+1. Make sure you have followed the steps in [Installation](#installation)
+2. To run the game open the terminal and run *npm run dev*
 
 ## Bugs
 1. None so far.
