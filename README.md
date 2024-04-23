@@ -11,9 +11,13 @@ Robo started off as an assigned assignment, however it soon became an exciting p
 - Random target placement to make things interesting.
 
 ## Installation
-1. Open your terminal and clone the repo.
-2. In the terminal, navigate into the ***robo*** folder.
-3. Run ***npm install***.
+To install Robo simply run the following commands.
+```
+$ git clone https://github.com/glorie-git/robo
+$ cd ../path/to/the/file
+$ npm install
+$ npm run dev
+```
 
 ## Gameplay
 Help Robo navigate throught on the tabletop using the controls at the bottom.
