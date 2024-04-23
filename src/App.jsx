@@ -11,6 +11,7 @@ function App() {
   const gameLength = 60;
   const rows = 5;
   const cols = 5;
+  const localStorageKey = "games";
 
   const [rotate, setRotate] = useState(0);
   const [roboLocation, setRoboLocation] = useState(startingLocation);
@@ -18,15 +19,6 @@ function App() {
   const [timeUp, setTimeUp] = useState(false);
   const [input, setInput] = useState("");
   const [isRunning, setIsRunning] = useState(true);
-
-  // PRELOAD DATA TO LOCALSTORAGE
-  // const data = [
-  //   ["player12", "21"],
-  //   ["player24", "59"],
-  //   ["player2", "31"],
-  // ];
-
-  // localStorage.setItem("games", JSON.stringify(data));
 
   function generateTargetLocation(roboLocation) {
     const newTargetLocation = Math.floor(Math.random() * 25);
@@ -37,9 +29,16 @@ function App() {
     }
   }
 
-  const [leaderboard, setLeaderboard] = useState(
-    JSON.parse(localStorage.getItem("games")),
-  );
+  const [leaderboard, setLeaderboard] = useState(null);
+
+  function getLeaderboard() {
+    return JSON.parse(localStorage.getItem(localStorageKey));
+  }
+
+  useEffect(() => {
+    const games = getLeaderboard();
+    setLeaderboard(games);
+  }, []);
 
   useEffect(() => {
     if (roboLocation === targetLocation) {
