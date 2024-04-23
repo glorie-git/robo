@@ -4,7 +4,7 @@ Robo is a web browser game where the player helps help reach all the targets bef
 ## Table of Contents
 - [Motivation](#motivation)
 - [Features](#features)
-- [Installation}(#installation)
+- [Installation](#installation)
 - [Gameplay](#gameplay)
 - [How to Run Game](#how-to-run-game)
 - [Bugs](#bugs)
