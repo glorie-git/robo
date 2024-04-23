@@ -132,12 +132,12 @@ function App() {
       }
 
       if (!timeUp) {
-        element.innerText = "";
+        element.innerHTML = "";
         element.style.transform = "rotate(0deg)";
         const newElement = document.getElementById(newLocation);
 
         if (newElement) {
-          newElement.innerText = "R";
+          newElement.innerHTML = "R";
           newElement.style.transform = `rotate(${rotate}deg)`;
           setRoboLocation(newLocation);
         }
@@ -174,6 +174,18 @@ function App() {
   function handleChange(e) {
     const input = e.target.value;
     setInput(input);
+
+    const element = document.getElementById("submit-btn");
+
+    if (input != "") {
+      element.style.backgroundColor = "black";
+      element.disabled = false;
+      element.style.cursor = "pointer";
+    } else {
+      element.style.backgroundColor = "#999";
+      element.style.cursor = "not-allowed";
+      element.disabled = false;
+    }
   }
 
   function handlePlayClick() {
@@ -192,6 +204,10 @@ function App() {
 
   function setTargetLocation() {
     targetLocation = generateTargetLocation(roboLocation);
+  }
+
+  function onSubmitClick(e) {
+    // TODO
   }
 
   return (
@@ -213,7 +229,16 @@ function App() {
                     placeholder="Enter a name"
                     onChange={handleChange}
                   />
-                  <button type="submit">Save</button>
+                  <button
+                    disabled={true}
+                    className="disabled-btn"
+                    style={{ cursor: `not-allowed` }}
+                    id="submit-btn"
+                    type="submit"
+                    onClick={onSubmitClick}
+                  >
+                    Save
+                  </button>
                 </form>
                 <button onClick={handlePlayClick}>Play</button>
               </div>
