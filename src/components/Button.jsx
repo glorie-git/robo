@@ -1,6 +1,8 @@
 function Button({ handleClick, button }) {
   return (
-    <button onClick={() => handleClick(button)}>{button.toUpperCase()}</button>
+    <button className="control-btn" onClick={() => handleClick(button)}>
+      {button.toUpperCase()}
+    </button>
   );
 }
 
