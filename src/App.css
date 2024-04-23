@@ -82,3 +82,12 @@ button:hover {
   max-width: 100px;
   margin: 0 5px;
 }
+
+img {
+  width: 80%;
+  height: 80%;
+}
+
+.disabled-btn {
+  background-color: #999;
+}

@@ -6,7 +6,7 @@ function Square({ value, id, rotate }) {
         id={id}
         style={{ transform: `rotate(${rotate}deg)` }}
       >
-        {value}
+        {value ? <img src={value} /> : null}
       </div>
     </div>
   );

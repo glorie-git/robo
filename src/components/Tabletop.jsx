@@ -1,4 +1,6 @@
 import Square from "./Square.jsx";
+import Robo from "./../assets/robot-svgrepo-com.svg";
+import Target from "./../assets/bug-svgrepo-com.svg";
 
 // Function to create tabletop using a double for loop
 // Paramter: rows and cols
@@ -14,8 +16,6 @@ function generateTabletop(
   let row = [];
   let rowIndex = 0;
 
-  console.log(getTargetLocation());
-
   if (getTargetLocation() === null) {
     setTargetLocation();
   }
@@ -29,10 +29,10 @@ function generateTabletop(
       let rotation = 0;
 
       if (index === roboLocation) {
-        value = "R";
+        value = Robo;
         rotation = rotate;
       } else if (index === getTargetLocation()) {
-        value = "T";
+        value = Target;
       }
 
       col.push(
