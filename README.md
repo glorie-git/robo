@@ -20,6 +20,7 @@ $ npm install
 
 ## Gameplay
 Help Robo navigate throught on the tabletop using the controls at the bottom. Reach all the targets before time runs out. But be careful, you might fall off the table top!
+
 ![](https://github.com/glorie-git/robo/blob/main/resources/ROBOGAMEPLACE-ezgif.com-video-to-gif-converter.gif))
 
 ## How to Run Game
