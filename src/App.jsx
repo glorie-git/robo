@@ -14,16 +14,26 @@ function generateTargetLocation(roboLocation) {
 }
 
 let targetLocation = null;
+const rows = 5;
+const cols = 5;
 
 // Function to create tabletop using a double for loop
 // Paramter: rows and cols
-// Retun: A 2D array
-function createTabletop(rows, cols, roboLocation) {
+// Return: A 2D array
+function generateTabletop(
+  rows,
+  cols,
+  roboLocation,
+  getTargetLocation,
+  setTargetLocation,
+) {
   let row = [];
   let rowIndex = 0;
 
-  if (targetLocation === null) {
-    targetLocation = generateTargetLocation(roboLocation);
+  console.log(getTargetLocation());
+
+  if (getTargetLocation() === null) {
+    setTargetLocation();
   }
 
   for (let r = 0; r < rows; r++) {
@@ -220,6 +230,14 @@ function App() {
     setIsRunning(true);
   }
 
+  function getTargetLocation() {
+    return targetLocation;
+  }
+
+  function setTargetLocation() {
+    targetLocation = generateTargetLocation(roboLocation);
+  }
+
   return (
     <>
       <div id="game">
@@ -246,7 +264,13 @@ function App() {
             ) : (
               <div>
                 <div className="tabletop">
-                  {createTabletop(5, 5, roboLocation)}
+                  {generateTabletop(
+                    rows,
+                    cols,
+                    roboLocation,
+                    getTargetLocation,
+                    setTargetLocation,
+                  )}
                 </div>
                 <div className="controls">
                   <Controller
