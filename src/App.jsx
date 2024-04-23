@@ -1,70 +1,16 @@
 import { useState, useEffect } from "react";
 import "./App.css";
-import Square from "./components/Square";
 import Controller from "./components/Controller";
 import Leaderboard from "./components/Leaderboard";
-
-function generateTargetLocation(roboLocation) {
-  const newTargetLocation = Math.floor(Math.random() * 25);
-  if (newTargetLocation !== roboLocation) {
-    return newTargetLocation;
-  } else {
-    return generateTargetLocation(roboLocation);
-  }
-}
+import Tabletop from "./components/Tabletop";
 
 let targetLocation = null;
-const rows = 5;
-const cols = 5;
-
-// Function to create tabletop using a double for loop
-// Paramter: rows and cols
-// Return: A 2D array
-function generateTabletop(
-  rows,
-  cols,
-  roboLocation,
-  getTargetLocation,
-  setTargetLocation,
-) {
-  let row = [];
-  let rowIndex = 0;
-
-  console.log(getTargetLocation());
-
-  if (getTargetLocation() === null) {
-    setTargetLocation();
-  }
-
-  for (let r = 0; r < rows; r++) {
-    let col = [];
-    // create squares
-    for (let c = 0; c < cols; c++) {
-      const index = rows * r + c;
-      let value;
-
-      if (index === roboLocation) {
-        value = "R";
-      } else if (index === targetLocation) {
-        value = "T";
-      }
-
-      col.push(<Square key={index} value={value} id={index} />);
-    }
-    row.push(
-      <div key={rowIndex} className="grid-row">
-        {col}
-      </div>,
-    );
-    rowIndex++;
-  }
-
-  return row;
-}
 
 function App() {
   const startingLocation = 12;
   const gameLength = 60;
+  const rows = 5;
+  const cols = 5;
 
   const [rotate, setRotate] = useState(0);
   const [roboLocation, setRoboLocation] = useState(startingLocation);
@@ -81,6 +27,15 @@ function App() {
   // ];
 
   // localStorage.setItem("games", JSON.stringify(data));
+
+  function generateTargetLocation(roboLocation) {
+    const newTargetLocation = Math.floor(Math.random() * 25);
+    if (newTargetLocation !== roboLocation) {
+      return newTargetLocation;
+    } else {
+      return generateTargetLocation(roboLocation);
+    }
+  }
 
   const [leaderboard, setLeaderboard] = useState(
     JSON.parse(localStorage.getItem("games")),
@@ -264,13 +219,13 @@ function App() {
             ) : (
               <div>
                 <div className="tabletop">
-                  {generateTabletop(
-                    rows,
-                    cols,
-                    roboLocation,
-                    getTargetLocation,
-                    setTargetLocation,
-                  )}
+                  <Tabletop
+                    rows={rows}
+                    cols={cols}
+                    roboLocation={roboLocation}
+                    getTargetLocation={getTargetLocation}
+                    setTargetLocation={setTargetLocation}
+                  />
                 </div>
                 <div className="controls">
                   <Controller

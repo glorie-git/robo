@@ -2,26 +2,23 @@ import Square from "./Square.jsx";
 
 // Function to create tabletop using a double for loop
 // Paramter: rows and cols
-// Retun: A 2D array
-function Tabletop({
+// Return: A 2D array
+function generateTabletop(
   rows,
   cols,
-  setTargetLocation,
+  roboLocation,
   getTargetLocation,
-  generateTargetLocation,
-}) {
+  setTargetLocation,
+) {
   let row = [];
   let rowIndex = 0;
 
-  console.log("In createTabletop component.");
-  let targetLocation = getTargetLocation();
-  console.log("Target Location: " + targetLocation);
+  console.log(getTargetLocation());
 
-  if (targetLocation === null) {
-    targetLocation = generateTargetLocation();
-    setTargetLocation(targetLocation);
-    console.log("Initial target location: " + targetLocation);
+  if (getTargetLocation() === null) {
+    setTargetLocation();
   }
+
   for (let r = 0; r < rows; r++) {
     let col = [];
     // create squares
@@ -29,9 +26,9 @@ function Tabletop({
       const index = rows * r + c;
       let value;
 
-      if (index === 12) {
+      if (index === roboLocation) {
         value = "R";
-      } else if (index === targetLocation) {
+      } else if (index === getTargetLocation()) {
         value = "T";
       }
 
@@ -44,13 +41,23 @@ function Tabletop({
     );
     rowIndex++;
   }
-
-  // console.log("Done.");
-  // console.log(row);
   return row;
 }
 
-//   const targetLocation = generateTargetLocation();
-//   setTargetLocation(targetLocation);
+function Tabletop({
+  rows,
+  cols,
+  roboLocation,
+  getTargetLocation,
+  setTargetLocation,
+}) {
+  return generateTabletop(
+    rows,
+    cols,
+    roboLocation,
+    getTargetLocation,
+    setTargetLocation,
+  );
+}
 
 export default Tabletop;
