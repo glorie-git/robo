@@ -5,8 +5,8 @@ Robo is a web browser game where the player helps help reach all the targets bef
 - [Motivation](#motivation)
 - [Features](#features)
 - [Installation](#installation)
-- [Gameplay](#gameplay)
 - [How to Run Game](#how-to-run-game)
+- [Gameplay](#gameplay)
 - [Bugs](#bugs)
 - [Frameworks](#frameworks)
 - [Contribute](#contribute)
@@ -30,16 +30,17 @@ $ cd ../path/to/the/file
 $ npm install
 ```
 
-## Gameplay
-Help Robo navigate throught on the tabletop using the controls at the bottom. Reach all the targets before time runs out. But be careful, you might fall off the table top!
-
-![](https://github.com/glorie-git/robo/blob/main/resources/ROBOGAMEPLACE-ezgif.com-video-to-gif-converter.gif)
-
 ## How to Run Game
 Make sure you have followed the steps in [installation](#installation). To run the game open the terminal and run the following command:
 ```
 $ npm run dev
 ```
+
+## Gameplay
+Help Robo navigate throught on the tabletop using the controls at the bottom. Reach all the targets before time runs out. But be careful, you might fall off the table top!
+
+![](https://github.com/glorie-git/robo/blob/main/resources/ROBOGAMEPLACE-ezgif.com-video-to-gif-converter.gif)
+
 ## Bugs
 1. None at the moment.
 
