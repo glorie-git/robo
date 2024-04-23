@@ -5,9 +5,9 @@ function Leaderboard({ leaderboard }) {
       <ul>
         {leaderboard
           .sort((a, b) => {
-            if (a[1] < b[1]) {
+            if (parseInt(a[1]) < parseInt(b[1])) {
               return 1;
-            } else if (a[1] > b[1]) {
+            } else if (parseInt(a[1]) > parseInt(b[1])) {
               return -1;
             }
 
