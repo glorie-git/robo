@@ -131,17 +131,7 @@ function App() {
         }
       }
 
-      if (!timeUp) {
-        element.innerHTML = "";
-        element.style.transform = "rotate(0deg)";
-        const newElement = document.getElementById(newLocation);
-
-        if (newElement) {
-          newElement.innerHTML = "R";
-          newElement.style.transform = `rotate(${rotate}deg)`;
-          setRoboLocation(newLocation);
-        }
-      }
+      setRoboLocation(newLocation);
     }
   }
 
@@ -251,6 +241,7 @@ function App() {
                     roboLocation={roboLocation}
                     getTargetLocation={getTargetLocation}
                     setTargetLocation={setTargetLocation}
+                    rotate={rotate}
                   />
                 </div>
                 <div className="controls">

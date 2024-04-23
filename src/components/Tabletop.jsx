@@ -9,6 +9,7 @@ function generateTabletop(
   roboLocation,
   getTargetLocation,
   setTargetLocation,
+  rotate,
 ) {
   let row = [];
   let rowIndex = 0;
@@ -25,14 +26,18 @@ function generateTabletop(
     for (let c = 0; c < cols; c++) {
       const index = rows * r + c;
       let value;
+      let rotation = 0;
 
       if (index === roboLocation) {
         value = "R";
+        rotation = rotate;
       } else if (index === getTargetLocation()) {
         value = "T";
       }
 
-      col.push(<Square key={index} value={value} id={index} />);
+      col.push(
+        <Square key={index} value={value} id={index} rotate={rotation} />,
+      );
     }
     row.push(
       <div key={rowIndex} className="grid-row">
@@ -50,6 +55,7 @@ function Tabletop({
   roboLocation,
   getTargetLocation,
   setTargetLocation,
+  rotate,
 }) {
   return generateTabletop(
     rows,
@@ -57,6 +63,7 @@ function Tabletop({
     roboLocation,
     getTargetLocation,
     setTargetLocation,
+    rotate,
   );
 }
 

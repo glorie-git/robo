@@ -1,7 +1,11 @@
-function Square({ value, id }) {
+function Square({ value, id, rotate }) {
   return (
     <div className="square">
-      <div className="container" id={id} style={{ transform: `rotate(0deg)` }}>
+      <div
+        className="container"
+        id={id}
+        style={{ transform: `rotate(${rotate}deg)` }}
+      >
         {value}
       </div>
     </div>
