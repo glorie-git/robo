@@ -1,6 +1,18 @@
 # Robo &middot; [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/glorie-git/robo/blob/main/LICENSE.md)
 Robo is a web browser game where the player helps help reach all the targets before time runs out. But be careful, you might fall off the table top!
 
+## Table of Contents
+- [Motivation](#motivation)
+- [Features](#features)
+- [Installation}(#installation)
+- [Gameplay](#gameplay)
+- [How to Run Game](#how-to-run-game)
+- [Bugs](#bugs)
+- [Frameworks](#frameworks)
+- [Contribute](#contribute)
+- [Credits](#credits)
+
+
 ## Motivation
 Robo started off as an assigned assignment, however it soon became an exciting project that made me wake up excited to work on.
 
@@ -31,7 +43,7 @@ $ npm run dev
 ## Bugs
 1. None at the moment.
 
-## Framework(s)
+## Frameworks
 - React + Vite
 
 ## Contribute
