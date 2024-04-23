@@ -17,7 +17,7 @@ Robo started off as an assigned assignment, however it soon became an exciting p
 
 ## Gameplay
 Help Robo navigate throught on the tabletop using the controls at the bottom.
-![]([https://github.com/Your_Repository_Name/Your_GIF_Name.gif](https://github.com/glorie-git/robo/blob/main/resources/ROBOGAMEPLACE-ezgif.com-video-to-gif-converter.gif))
+![](https://github.com/glorie-git/robo/blob/main/resources/ROBOGAMEPLACE-ezgif.com-video-to-gif-converter.gif))
 
 ## How to Play?
 1. Make sure you have followed the steps in [Installation](#installation).
