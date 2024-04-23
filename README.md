@@ -5,7 +5,6 @@ Robo is a web browser game where the player helps help reach all the targets bef
 Robo started off as an assigned assignment, however it soon became an exciting project that made me wake up excited to work on.
 
 ## Features
-This is where you write what all extra features have been done in your project. Basically, this is where you try to make your project stand out from the rest.
 - Robo game with 3 navigating controls
 - A leaderboard to compete with others
 - A timer to put preasure during game play
@@ -23,9 +22,6 @@ Help Robo navigate throught on the tabletop using the controls at the bottom.
 ## How to Play?
 Make sure you have followed the steps in [Installation](#installation)
 To run the game open the terminal and run *npm run dev*
-
-## Build Status
-This basically explains the current build status of the project. If there is a bug /error which needs addressing. This is done so for two different reasons The user understands that this is an issue and does not spend more time figuring if it was a mistake on their part.A developer who is familiar with the issue can suggest some solutions directly without going through the whole code.
 
 ## Bugs
 1. None so far.
