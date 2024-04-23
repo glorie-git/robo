@@ -16,17 +16,17 @@ To install Robo simply run the following commands.
 $ git clone https://github.com/glorie-git/robo
 $ cd ../path/to/the/file
 $ npm install
-$ npm run dev
 ```
 
 ## Gameplay
-Help Robo navigate throught on the tabletop using the controls at the bottom.
+Help Robo navigate throught on the tabletop using the controls at the bottom. Reach all the targets before time runs out. But be careful, you might fall off the table top!
 ![](https://github.com/glorie-git/robo/blob/main/resources/ROBOGAMEPLACE-ezgif.com-video-to-gif-converter.gif))
 
-## How to Play?
-1. Make sure you have followed the steps in [Installation](#installation).
-2. To run the game open the terminal and run *npm run dev*.
-
+## How to Run Game
+Make sure you have followed the steps in [Installation](#installation). To run the game open the terminal and run the following command:
+```
+$ npm run dev
+```
 ## Bugs
 1. None at the moment.
 
