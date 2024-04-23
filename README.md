@@ -13,8 +13,8 @@ This is where you write what all extra features have been done in your project. 
 
 ## Installation
 1. Open your terminal and clone the repo
-2. In the terminal, navigate into the *robo* folder
-3. Run *npm install*
+2. In the terminal, navigate into the ***robo*** folder
+3. Run ***npm install***
 
 ## Gameplay
 Help Robo navigate throught on the tabletop using the controls at the bottom.
