@@ -75,29 +75,23 @@ function App() {
   }, [timeUp]);
 
   function handleClick(value) {
-    const element = document.getElementById(roboLocation);
-    if (value === "left") {
-      const rotation = (rotate - 90) % 360;
-      element.style.transform = `rotate(${rotation}deg)`;
+    // Determine Robo's next rotation
 
-      setRotate(rotation);
-    } else if (value === "right") {
-      const rotation = (rotate + 90) % 360;
-      element.style.transform = `rotate(${rotation}deg)`;
-
+    if (value === "left" || value === "right") {
+      const element = document.getElementById(roboLocation);
+      let rotation = null;
+      if (value === "left") {
+        rotation = (rotate - 90) % 360;
+        element.style.transform = `rotate(${rotation}deg)`;
+      } else {
+        rotation = (rotate + 90) % 360;
+        element.style.transform = `rotate(${rotation}deg)`;
+      }
       setRotate(rotation);
     } else if (value === "forward") {
-      let newLocation;
+      // Determine the new location of Robo on the tabletop
+      const newLocation = determineLocation(rotate, roboLocation);
 
-      if (rotate === 0) {
-        newLocation = roboLocation - 5;
-      } else if (rotate === 90 || rotate === -270) {
-        newLocation = roboLocation + 1;
-      } else if (rotate === -90 || rotate === 270) {
-        newLocation = roboLocation - 1;
-      } else if (rotate === 180 || rotate === -180) {
-        newLocation = roboLocation + 5;
-      }
       // Determine whether we have falled off an edge
       const isTimeUp = isOffEdge(newLocation);
       if (isTimeUp) {
@@ -105,6 +99,18 @@ function App() {
       } else {
         setRoboLocation(newLocation);
       }
+    }
+  }
+
+  function determineLocation(rotate, roboLocation) {
+    if (rotate === 0) {
+      return roboLocation - 5;
+    } else if (rotate === 90 || rotate === -270) {
+      return roboLocation + 1;
+    } else if (rotate === -90 || rotate === 270) {
+      return roboLocation - 1;
+    } else if (rotate === 180 || rotate === -180) {
+      return roboLocation + 5;
     }
   }
 
