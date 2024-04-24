@@ -75,8 +75,6 @@ function App() {
   }, [timeUp]);
 
   function handleClick(value) {
-    console.log(value);
-
     const element = document.getElementById(roboLocation);
     if (value === "left") {
       const rotation = (rotate - 90) % 360;
@@ -100,46 +98,43 @@ function App() {
       } else if (rotate === 180 || rotate === -180) {
         newLocation = roboLocation + 5;
       }
-
-      let isTimeUp = false;
-
-      if (newLocation < 0) {
-        // Robo has fallen off the top edge
-        console.log("Fallen off the top.");
-        isTimeUp = true;
-        setTimeUp(isTimeUp);
-      } else if (newLocation > 25) {
-        // Robo has fallen off the bottom edge
-        console.log("Fallen off the bottom.");
-        isTimeUp = true;
-        setTimeUp(isTimeUp);
-      } else if (roboLocation % 5 === 0) {
-        // Robo is at the left edge
-        if (rotate === -90 || rotate === 270) {
-          // Falls off on left edge
-          console.log("Fallen off left edge.");
-          isTimeUp = true;
-          setTimeUp(isTimeUp);
-        }
-      } else if (roboLocation % 5 === 4) {
-        // Robo is at the right edge
-        if (rotate === 90 || rotate === -270) {
-          // Falls off on right edge
-          console.log("Fallen off right edge.");
-          isTimeUp = true;
-          setTimeUp(isTimeUp);
-        }
-      }
+      // Determine whether we have falled off an edge
+      const isTimeUp = isOffEdge(newLocation);
+      setTimeUp(isTimeUp);
 
       setRoboLocation(newLocation);
     }
   }
 
+  function isOffEdge(newLocation) {
+    if (newLocation < 0) {
+      // Robo has fallen off the top edge
+      return true;
+    } else if (newLocation > 25) {
+      // Robo has fallen off the bottom edge
+      return true;
+    } else if (roboLocation % 5 === 0) {
+      // Robo is at the left edge
+      if (rotate === -90 || rotate === 270) {
+        // Falls off on left edge
+        return true;
+      }
+    } else if (roboLocation % 5 === 4) {
+      // Robo is at the right edge
+      if (rotate === 90 || rotate === -270) {
+        // Falls off on right edge
+        return true;
+      }
+    }
+  }
+
   function submitPoints(e) {
+    // Prevent default action of page refresh
     e.preventDefault();
 
+    // If we have saved previous games simply add the submitted game
+    // Else store the submitted game as a new game
     const games = getLeaderboard();
-
     if (games) {
       console.log(games);
       games.push([input, `${points}`]);
@@ -151,12 +146,12 @@ function App() {
       );
     }
 
+    // Update UI leaderboard
     const updatedGames = getLeaderboard();
-
     setLeaderboard(updatedGames);
-    console.log("Game submitted.");
     setInput("");
 
+    // Hide the form so that user cannot resubmit their points.
     const element = document.getElementById("points-form");
     element.style.display = "none";
   }
@@ -196,10 +191,6 @@ function App() {
     targetLocation = generateTargetLocation(roboLocation);
   }
 
-  function onSubmitClick(e) {
-    // TODO
-  }
-
   return (
     <>
       <div id="game">
@@ -225,7 +216,6 @@ function App() {
                     style={{ cursor: `not-allowed` }}
                     id="submit-btn"
                     type="submit"
-                    onClick={onSubmitClick}
                   >
                     Save
                   </button>
