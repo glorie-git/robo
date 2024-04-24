@@ -4,6 +4,8 @@ import Controller from "./components/Controller";
 import Leaderboard from "./components/Leaderboard";
 import Tabletop from "./components/Tabletop";
 import EndGame from "./components/EndGame";
+import Scoreboard from "./components/Scoreboard";
+import Timer from "./components/Timer";
 
 let targetLocation = null;
 
@@ -38,7 +40,7 @@ function App() {
 
   useEffect(() => {
     setLeaderboard(getLeaderboard());
-  }, []);
+  }, [timeUp]);
 
   useEffect(() => {
     if (roboLocation === targetLocation) {
@@ -206,14 +208,16 @@ function App() {
   return (
     <>
       <div id="game">
-        <div>
+        <div id="left-panel">
           <div className="grid-row space">
-            <div>Score: {points}</div>
-            <div>Timer: {time}</div>
+            {/* <div>Score: {points}</div> */}
+            <Scoreboard points={points} />
+            <Timer time={time} />
           </div>
           <div>
             {timeUp ? (
               <EndGame
+                points={points}
                 submitPoints={submitPoints}
                 input={input}
                 handleChange={handleChange}
@@ -242,7 +246,7 @@ function App() {
           </div>
         </div>
 
-        <div id="board">
+        <div id="right-panel">
           <Leaderboard leaderboard={leaderboard} />
         </div>
       </div>

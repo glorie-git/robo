@@ -1,7 +1,15 @@
-function EndGame({ submitPoints, input, handleChange, handlePlayClick }) {
+// Component to display the end of game screen.
+function EndGame({
+  points,
+  submitPoints,
+  input,
+  handleChange,
+  handlePlayClick,
+}) {
   return (
     <>
       <h1>Game Over</h1>
+      <h3>You scored {points}!</h3>
       <form id="points-form" onSubmit={submitPoints}>
         <p>Enter a name below to save your score.</p>
         <input
