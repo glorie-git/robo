@@ -3,6 +3,7 @@ import "./App.css";
 import Controller from "./components/Controller";
 import Leaderboard from "./components/Leaderboard";
 import Tabletop from "./components/Tabletop";
+import EndGame from "./components/EndGame";
 
 let targetLocation = null;
 
@@ -76,7 +77,6 @@ function App() {
 
   function handleClick(value) {
     // Determine Robo's next rotation
-
     if (value === "left" || value === "right") {
       const element = document.getElementById(roboLocation);
       let rotation = null;
@@ -183,6 +183,10 @@ function App() {
 
   function handlePlayClick() {
     // RESET GAME
+    resetGame(startingLocation, gameLength);
+  }
+
+  function resetGame(startingLocation, gameLength) {
     setPoints(0);
     setTimeUp(false);
     setRoboLocation(startingLocation);
@@ -209,27 +213,12 @@ function App() {
           </div>
           <div>
             {timeUp ? (
-              <div>
-                <h1>Game Over</h1>
-                <form id="points-form" onSubmit={submitPoints}>
-                  <p>Enter a name below to save your score.</p>
-                  <input
-                    value={input}
-                    placeholder="Enter a name"
-                    onChange={handleChange}
-                  />
-                  <button
-                    disabled={true}
-                    className="disabled-btn"
-                    style={{ cursor: `not-allowed` }}
-                    id="submit-btn"
-                    type="submit"
-                  >
-                    Save
-                  </button>
-                </form>
-                <button onClick={handlePlayClick}>Play</button>
-              </div>
+              <EndGame
+                submitPoints={submitPoints}
+                input={input}
+                handleChange={handleChange}
+                handlePlayClick={handlePlayClick}
+              />
             ) : (
               <div>
                 <div className="tabletop">
