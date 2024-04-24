@@ -4,7 +4,7 @@ import Controller from "./components/Controller";
 import Leaderboard from "./components/Leaderboard";
 import Tabletop from "./components/Tabletop";
 import EndGame from "./components/EndGame";
-import Scoreboard from "./components/Scoreboard";
+import Scoreboard from "./components/ScoreBoard";
 import Timer from "./components/Timer";
 
 let targetLocation = null;
