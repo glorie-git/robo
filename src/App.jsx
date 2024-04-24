@@ -100,9 +100,11 @@ function App() {
       }
       // Determine whether we have falled off an edge
       const isTimeUp = isOffEdge(newLocation);
-      setTimeUp(isTimeUp);
-
-      setRoboLocation(newLocation);
+      if (isTimeUp) {
+        setTimeUp(isTimeUp);
+      } else {
+        setRoboLocation(newLocation);
+      }
     }
   }
 
