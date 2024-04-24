@@ -44,6 +44,16 @@ Help Robo navigate throught on the tabletop using the controls at the bottom. Re
 ## Bugs
 1. Robo flashes when going from square to square cell (this is probably because we are using a svg).
 
+## To-DO
+- [x] Tabletop
+- [x] Scoreboard
+- [ ] Welcome screen
+- [x] Leaderboard
+- [x] Timer
+- [ ] Multiple targets
+- [ ] Multiple levels
+- [ ] Customization of Robo
+
 ## Frameworks
 - React + Vite
 
