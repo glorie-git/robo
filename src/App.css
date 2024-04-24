@@ -29,7 +29,8 @@
 #game {
   display: flex;
   flex-direction: row;
-  margin: 20px;
+  width: 50%;
+  margin: 0 auto;
 }
 
 p {
@@ -37,11 +38,13 @@ p {
   margin: 0;
 }
 
-#board {
-  margin: 0 50px;
+#right-panel,
+#left-panel {
+  margin: 20px 50px;
+  width: 100%;
 }
 
-#board > ul {
+#right-panel > ul {
   list-style-type: none;
   margin: 0;
   padding: 0;
