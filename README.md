@@ -56,10 +56,3 @@ Help Robo navigate throught on the tabletop using the controls at the bottom. Re
 
 ## Frameworks
 - React + Vite
-
-## Contribute
-Contribute and suggestions are welcome!
-
-## Credits
-- [Tutorial: Tic-Tac-Toe](https://react.dev/learn/tutorial-tic-tac-toe)
-- [Simple React Countdown Timer](https://codesandbox.io/p/sandbox/simple-react-countdown-timer-zdzwy?file=%2Fsrc%2FApp.js)
