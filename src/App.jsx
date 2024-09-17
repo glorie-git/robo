@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import "./App.css";
 import Controller from "./components/Controller";
 import Leaderboard from "./components/Leaderboard";
@@ -25,14 +25,14 @@ function App() {
   const [time, setTime] = useState(gameLength);
   const [leaderboard, setLeaderboard] = useState(null);
 
-  function generateTargetLocation(roboLocation) {
+  const generateTargetLocation = useCallback((roboLocation) => {
     const newTargetLocation = Math.floor(Math.random() * 25);
     if (newTargetLocation !== roboLocation) {
       return newTargetLocation;
     } else {
       return generateTargetLocation(roboLocation);
     }
-  }
+  }, []);
 
   function getLeaderboard() {
     return JSON.parse(localStorage.getItem(localStorageKey));
@@ -49,7 +49,7 @@ function App() {
       const newTargetLocation = generateTargetLocation(roboLocation); // generate new target roboLocation
       targetLocation = newTargetLocation;
     }
-  }, [roboLocation]);
+  }, [generateTargetLocation, points, roboLocation]);
 
   // Game timer
   // Thanks to https://codesandbox.io/p/sandbox/simple-react-countdown-timer-forked-ztxcnx?file=%2Fsrc%2FApp.js%3A5%2C3-19%2C79
