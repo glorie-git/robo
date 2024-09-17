@@ -36,10 +36,10 @@ Make sure you have followed the steps in [installation](#installation). To run t
 $ npm run dev
 ```
 
-## Gameplay
+<!-- ## Gameplay
 Help Robo navigate throught on the tabletop using the controls at the bottom. Reach all the targets before time runs out. But be careful, you might fall off the table top!
 
-![](https://github.com/glorie-git/robo/blob/main/resources/ROBOGAMEPLACE-ezgif.com-video-to-gif-converter.gif)
+![](https://github.com/glorie-git/robo/blob/main/resources/ROBOGAMEPLACE-ezgif.com-video-to-gif-converter.gif) -->
 
 ## Bugs
 1. Robo flashes when going from square to square cell (this is probably because we are using a svg).
