@@ -4,7 +4,7 @@ import Controller from "./components/Controller";
 import Leaderboard from "./components/Leaderboard";
 import Tabletop from "./components/Tabletop";
 import EndGame from "./components/EndGame";
-// import Scoreboard from "./components/ScoreBoard";
+import Scoreboard from "./components/Scoreboard";
 import Timer from "./components/Timer";
 
 let targetLocation = null;
@@ -211,7 +211,7 @@ function App() {
         <div id="left-panel">
           <div className="grid-row space">
             {/* <div>Score: {points}</div> */}
-            {/*<Scoreboard points={points} /> */}
+            <Scoreboard points={points} />
             <Timer time={time} />
           </div>
           <div>
