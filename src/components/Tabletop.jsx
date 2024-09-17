@@ -11,7 +11,7 @@ function generateTabletop(
   roboLocation,
   getTargetLocation,
   setTargetLocation,
-  rotate,
+  rotate
 ) {
   let row = [];
   let rowIndex = 0;
@@ -36,13 +36,13 @@ function generateTabletop(
       }
 
       col.push(
-        <Square key={index} value={value} id={index} rotate={rotation} />,
+        <Square key={index} value={value} id={index} rotate={rotation} />
       );
     }
     row.push(
       <div key={rowIndex} className="grid-row">
         {col}
-      </div>,
+      </div>
     );
     rowIndex++;
   }
@@ -63,7 +63,7 @@ function Tabletop({
     roboLocation,
     getTargetLocation,
     setTargetLocation,
-    rotate,
+    rotate
   );
 }
 

@@ -8,8 +8,8 @@ function EndGame({
 }) {
   return (
     <>
-      <h1>Game Over</h1>
-      <h3>You scored {points}!</h3>
+      <h2>Game Over</h2>
+      <p>You scored {points}</p>
       <form id="points-form" onSubmit={submitPoints}>
         <p>Enter a name below to save your score.</p>
         <input
@@ -27,7 +27,7 @@ function EndGame({
           Save
         </button>
       </form>
-      <button onClick={handlePlayClick}>Play</button>
+      <button onClick={handlePlayClick}>Play Again</button>
     </>
   );
 }
