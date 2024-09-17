@@ -1,0 +1,14 @@
+#home-container {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  margin-top: 25%;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+  text-align: center;
+}
+
+p {
+  max-width: 450px;
+}
