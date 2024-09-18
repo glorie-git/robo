@@ -8,33 +8,34 @@ import { useState, useEffect, useCallback } from "react";
 import DialogBox from "../../components/Dialog";
 import "./Game.css";
 
-let targetLocation = null;
-
 const Game = () => {
   const homeDialog = document.getElementById("home-dialog");
   const startingLocation = 12;
   const gameLength = 60;
-  const rows = 5;
-  const cols = 5;
-  const localStorageKey = "games";
-
-  const [rotate, setRotate] = useState(0);
-  const [roboLocation, setRoboLocation] = useState(startingLocation);
-  const [points, setPoints] = useState(0);
-  const [timeUp, setTimeUp] = useState(false);
-  const [input, setInput] = useState("");
-  const [isRunning, setIsRunning] = useState(false);
-  const [time, setTime] = useState(gameLength);
-  const [leaderboard, setLeaderboard] = useState(null);
+  const localStorageKey = "roboGame";
+  const numberOfGrids = 25;
 
   const generateTargetLocation = useCallback((roboLocation) => {
-    const newTargetLocation = Math.floor(Math.random() * 25);
+    const newTargetLocation = Math.floor(Math.random() * numberOfGrids);
     if (newTargetLocation !== roboLocation) {
       return newTargetLocation;
     } else {
       return generateTargetLocation(roboLocation);
     }
   }, []);
+
+  const [grids, setGrids] = useState(useState(Array(numberOfGrids).fill("")));
+  const [rotate, setRotate] = useState(0);
+  const [roboLocation, setRoboLocation] = useState(startingLocation);
+  const [targetLocation, setTargetLocation] = useState(
+    generateTargetLocation(roboLocation)
+  );
+  const [points, setPoints] = useState(0);
+  const [timeUp, setTimeUp] = useState(false);
+  const [input, setInput] = useState("");
+  const [isRunning, setIsRunning] = useState(false);
+  const [time, setTime] = useState(gameLength);
+  const [leaderboard, setLeaderboard] = useState(null);
 
   function getLeaderboard() {
     return JSON.parse(localStorage.getItem(localStorageKey));
@@ -48,9 +49,9 @@ const Game = () => {
     if (roboLocation === targetLocation) {
       setPoints(points + 1);
       const newTargetLocation = generateTargetLocation(roboLocation);
-      targetLocation = newTargetLocation;
+      setTargetLocation(newTargetLocation);
     }
-  }, [generateTargetLocation, points, roboLocation]);
+  }, [generateTargetLocation, points, roboLocation, targetLocation]);
 
   useEffect(() => {
     let timer = setInterval(() => {
@@ -95,6 +96,10 @@ const Game = () => {
       if (isTimeUp) {
         setTimeUp(isTimeUp);
       } else {
+        const element = document.getElementById(newLocation);
+        const lastElement = document.getElementById(roboLocation);
+        lastElement.style.transform = `rotate(${0}deg)`;
+        element.style.transform = `rotate(${rotate}deg)`;
         setRoboLocation(newLocation);
       }
     }
@@ -191,14 +196,6 @@ const Game = () => {
     setIsRunning(true);
   }
 
-  function getTargetLocation() {
-    return targetLocation;
-  }
-
-  function setTargetLocation() {
-    targetLocation = generateTargetLocation(roboLocation);
-  }
-
   return (
     <div id="game-container">
       <button
@@ -230,12 +227,11 @@ const Game = () => {
           <>
             <div className="tabletop">
               <Tabletop
-                rows={rows}
-                cols={cols}
+                grids={grids}
+                setGrids={setGrids}
+                targetLocation={targetLocation}
                 roboLocation={roboLocation}
-                getTargetLocation={getTargetLocation}
                 setTargetLocation={setTargetLocation}
-                rotate={rotate}
               />
             </div>
             <div className="controls">
