@@ -1,0 +1,29 @@
+name: Deploy Robo to Netlify
+  
+on:
+  push:
+    branches: [master, main]
+  pull_request:
+    branches: [master, main]
+
+jobs:
+  setup:
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install dependencies
+        run: npm install && npm run build
+        
+  deploy:
+    runs-on: ubuntu-22.04
+    needs: setup 
+    steps:
+      - name: Deploy to Netlify
+        run: curl -X POST -d '{}' ${{ secrets.NETLIFY_ROBO_BUILD_HOOK }}
