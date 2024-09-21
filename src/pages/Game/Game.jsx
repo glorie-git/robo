@@ -6,6 +6,8 @@ import Scoreboard from "../../components/Score";
 import Timer from "../../components/Timer";
 import { useState, useEffect, useCallback } from "react";
 import DialogBox from "../../components/Dialog";
+import { rotateSound, forwardSound } from "../../assets";
+
 import "./Game.css";
 
 const Game = () => {
@@ -14,6 +16,7 @@ const Game = () => {
   const gameLength = 60;
   const localStorageKey = "roboGame";
   const numberOfGrids = 25;
+  const soundElement = document.getElementById("sound-element");
 
   const generateTargetLocation = useCallback((roboLocation) => {
     const newTargetLocation = Math.floor(Math.random() * numberOfGrids);
@@ -89,6 +92,8 @@ const Game = () => {
         element.style.transform = `rotate(${rotation}deg)`;
       }
       setRotate(rotation);
+      soundElement.src = rotateSound;
+      soundElement.play();
     } else if (value === "forward") {
       const newLocation = determineLocation(rotate, roboLocation);
 
@@ -102,6 +107,9 @@ const Game = () => {
         element.style.transform = `rotate(${rotate}deg)`;
         setRoboLocation(newLocation);
       }
+
+      soundElement.src = forwardSound;
+      soundElement.play();
     }
   }
 
@@ -196,6 +204,27 @@ const Game = () => {
     setIsRunning(true);
   }
 
+  document.addEventListener("keypress", (e) => {
+    if (!timeUp) {
+      let value = "";
+
+      switch (e.code) {
+        case "KeyA":
+          value = "left";
+          break;
+        case "KeyD":
+          value = "right";
+          break;
+        case "KeyW":
+          value = "forward";
+          break;
+        default:
+      }
+
+      handleClick(value);
+    }
+  });
+
   return (
     <div id="game-container">
       <button
@@ -243,6 +272,7 @@ const Game = () => {
           </>
         )}
       </>
+      <audio id="sound-element"></audio>
     </div>
   );
 };
