@@ -1,0 +1,19 @@
+name: Deploy Robo to Netlify
+
+env:
+  DEPLOY: ${{ contains(join(github.event.commits.*.message, ' '), '#deploy') }}
+  
+on:
+  push:
+    branches: [master, main]
+  pull_request:
+    branches: [master, main]
+
+jobs:   
+  print_commit_message:
+     
+    runs-on: ubuntu-22.04
+    # needs: setup 
+    steps:
+      - name: Print commit message
+        run: echo ${{ github.env.DEPLOY }}
