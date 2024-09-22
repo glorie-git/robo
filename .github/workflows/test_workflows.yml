@@ -1,4 +1,4 @@
-name: Deploy Robo to Netlify
+name: Test workflows
 
 env:
   DEPLOY: ${{ contains(join(github.event.commits.*.message, ' '), '#deploy') }}
