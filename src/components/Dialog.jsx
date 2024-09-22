@@ -1,26 +1,16 @@
-import { Link } from "react-router-dom";
+import PropTypes from "prop-types";
 
-const DialogBox = ({ dialogElement }) => {
+const DialogBox = ({ id, dialogContent }) => {
   return (
-    <dialog id="home-dialog">
-      <form method="dialog">
-        <p>Are you sure you want go to the home screen?</p>
-        <div style={{ textAlign: "center" }}>
-          <button type="reset">
-            <Link to="/">Confirm</Link>
-          </button>
-          <button
-            type="submit"
-            onClick={() => {
-              dialogElement.close();
-            }}
-          >
-            Cancel
-          </button>
-        </div>
-      </form>
+    <dialog id={id}>
+      <form method="dialog">{dialogContent}</form>
     </dialog>
   );
+};
+
+DialogBox.propTypes = {
+  id: PropTypes.string,
+  dialogContent: PropTypes.object.isRequired,
 };
 
 export default DialogBox;

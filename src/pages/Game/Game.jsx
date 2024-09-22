@@ -7,11 +7,13 @@ import Timer from "../../components/Timer";
 import { useState, useEffect, useCallback } from "react";
 import DialogBox from "../../components/Dialog";
 import { rotateSound, forwardSound } from "../../assets";
+import { Link } from "react-router-dom";
 
 import "./Game.css";
 
 const Game = () => {
   const homeDialog = document.getElementById("home-dialog");
+  const menuDialog = document.getElementById("menu-dialog");
   const startingLocation = 12;
   const gameLength = 60;
   const localStorageKey = "roboGame";
@@ -39,6 +41,7 @@ const Game = () => {
   const [isRunning, setIsRunning] = useState(false);
   const [time, setTime] = useState(gameLength);
   const [leaderboard, setLeaderboard] = useState(null);
+  const [soundEffectsToggle, setSoundEffectsToggle] = useState(true);
 
   function getLeaderboard() {
     return JSON.parse(localStorage.getItem(localStorageKey));
@@ -92,8 +95,9 @@ const Game = () => {
         element.style.transform = `rotate(${rotation}deg)`;
       }
       setRotate(rotation);
+
       soundElement.src = rotateSound;
-      soundElement.play();
+      if (soundEffectsToggle) soundElement.play();
     } else if (value === "forward") {
       const newLocation = determineLocation(rotate, roboLocation);
 
@@ -109,7 +113,7 @@ const Game = () => {
       }
 
       soundElement.src = forwardSound;
-      soundElement.play();
+      if (soundEffectsToggle) soundElement.play();
     }
   }
 
@@ -204,26 +208,42 @@ const Game = () => {
     setIsRunning(true);
   }
 
-  document.addEventListener("keypress", (e) => {
-    if (!timeUp) {
-      let value = "";
+  const homeDialogContent = (
+    <div>
+      <p>Are you sure you want go to the home screen?</p>
+      <div style={{ textAlign: "center" }}>
+        <button type="reset">
+          <Link to="/">Confirm</Link>
+        </button>
+        <button type="submit">Cancel</button>
+      </div>
+    </div>
+  );
 
-      switch (e.code) {
-        case "KeyA":
-          value = "left";
-          break;
-        case "KeyD":
-          value = "right";
-          break;
-        case "KeyW":
-          value = "forward";
-          break;
-        default:
-      }
-
-      handleClick(value);
-    }
-  });
+  const menuDialogContent = (toggle) => {
+    let tempToggle = toggle;
+    return (
+      <div>
+        <div>
+          Sounds Effects:
+          <button
+            type="button"
+            onClick={() => setSoundEffectsToggle(!tempToggle)}
+          >
+            {tempToggle ? "On" : "Off"}
+          </button>
+        </div>
+        <div>
+          <button
+            onClick={() => setSoundEffectsToggle(tempToggle)}
+            type="submit"
+          >
+            Save
+          </button>
+        </div>
+      </div>
+    );
+  };
 
   return (
     <div id="game-container">
@@ -235,7 +255,19 @@ const Game = () => {
       >
         Go Home
       </button>
-      <DialogBox element={homeDialog} />
+      <button
+        className="menu-btn"
+        onClick={() => {
+          menuDialog.showModal();
+        }}
+      >
+        Settings
+      </button>
+      <DialogBox id="home-dialog" dialogContent={homeDialogContent} />
+      <DialogBox
+        id="menu-dialog"
+        dialogContent={menuDialogContent(soundEffectsToggle)}
+      />
       <section className="top-section grid-row space">
         <Timer className="margin-right" time={time} />
         <Scoreboard className="margin-left" points={points} />
