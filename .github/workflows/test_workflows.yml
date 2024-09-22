@@ -2,7 +2,7 @@ name: Test workflows
 
 env:
   DEPLOY: ${{ contains(join(github.event.commits.*.message, ' '), '#deploy') }}
-  
+
 on:
   push:
     branches: [master, main]
@@ -16,9 +16,8 @@ jobs:
       - name: Print commit message
         run: echo ${{ github.env.DEPLOY }}
   if_statement:
-    if: ${{ !github.env.DEPLOY }}
+    if: github.env.DEPLOY == true
     runs-on: ubuntu-22.04
     steps:
       - name: Print commit message
         run: echo "The flag is true"
-        
