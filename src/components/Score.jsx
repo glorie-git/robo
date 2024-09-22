@@ -1,6 +1,5 @@
 import PropTypes from "prop-types";
 
-// Component to display the points
 const Score = ({ points }) => {
   return (
     <div id="score">

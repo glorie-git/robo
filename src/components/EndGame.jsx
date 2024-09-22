@@ -1,6 +1,5 @@
 import PropTypes from "prop-types";
 
-// Component to display the end of game screen.
 const EndGame = ({
   points,
   submitPoints,
