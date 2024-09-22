@@ -16,7 +16,7 @@ jobs:
       - name: Print commit message
         run: echo ${{ github.env.DEPLOY }}
   if_statement:
-    if: ${{github.env.DEPLOY == true}}
+    if: ${{!github.env.DEPLOY}}
     runs-on: ubuntu-22.04
     steps:
       - name: Print commit message
