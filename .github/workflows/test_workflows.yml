@@ -1,8 +1,5 @@
 name: Test new workflows
 
-env:
-  DEPLOY: ${{ contains(join(github.event.commits.*.message, ' '), '#deploy') }}
-
 on:
   push:
     branches: [master, main]
@@ -14,7 +11,7 @@ jobs:
     runs-on: ubuntu-22.04
     steps:
       - name: Print commit message
-        run: echo ${{ github.env.DEPLOY }}
+        run: echo ${{ contains(join(github.event.commits.*.message, ' '), '#deploy') }}
   if_statement:
     if: ${{ contains(join(github.event.commits.*.message, ' '), '#deploy') }}
     runs-on: ubuntu-22.04
