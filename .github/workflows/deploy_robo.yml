@@ -1,7 +1,4 @@
 name: Deploy Robo to Netlify
-
-env:
-  DEPLOY: ${{ contains(join(github.event.commits.*.message, ' '), '#deploy') }}
   
 on:
   push:
@@ -26,7 +23,7 @@ jobs:
   #       run: npm install && npm run build
         
   deploy:
-    if: ${{ github.env.DEPLOY }}
+    if: ${{ contains(join(github.event.commits.*.message, ' '), '#deploy') }}
     runs-on: ubuntu-22.04
     # needs: setup 
     steps:
