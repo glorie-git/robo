@@ -9,11 +9,16 @@ on:
   pull_request:
     branches: [master, main]
 
-jobs:   
+jobs:
   print_commit_message:
-     
     runs-on: ubuntu-22.04
-    # needs: setup 
     steps:
       - name: Print commit message
         run: echo ${{ github.env.DEPLOY }}
+  if_statement:
+    if: ${{ github.env.DEPLOY }}
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Print commit message
+        run: echo "The flag is true"
+        
