@@ -1,4 +1,4 @@
-name: Test workflows
+name: Test new workflows
 
 env:
   DEPLOY: ${{ contains(join(github.event.commits.*.message, ' '), '#deploy') }}
