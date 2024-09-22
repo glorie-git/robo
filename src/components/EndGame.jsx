@@ -1,11 +1,13 @@
+import PropTypes from "prop-types";
+
 // Component to display the end of game screen.
-function EndGame({
+const EndGame = ({
   points,
   submitPoints,
   input,
   handleChange,
   handlePlayClick,
-}) {
+}) => {
   return (
     <>
       <h2>Game Over</h2>
@@ -30,6 +32,14 @@ function EndGame({
       <button onClick={handlePlayClick}>Play Again</button>
     </>
   );
-}
+};
+
+EndGame.propTypes = {
+  points: PropTypes.number.isRequired,
+  submitPoints: PropTypes.func.isRequired,
+  input: PropTypes.string.isRequired,
+  handleChange: PropTypes.func.isRequired,
+  handlePlayClick: PropTypes.func.isRequired,
+};
 
 export default EndGame;

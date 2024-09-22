@@ -1,4 +1,6 @@
-function Square({ value, id }) {
+import PropTypes from "prop-types";
+
+const Square = ({ value, id }) => {
   return (
     <div className="square">
       <div className="container" id={id}>
@@ -6,6 +8,11 @@ function Square({ value, id }) {
       </div>
     </div>
   );
-}
+};
+
+Square.propTypes = {
+  value: PropTypes.string.isRequired,
+  id: PropTypes.number.isRequired,
+};
 
 export default Square;

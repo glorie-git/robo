@@ -1,4 +1,6 @@
-function Leaderboard({ leaderboard }) {
+import PropTypes from "prop-types";
+
+const Leaderboard = ({ leaderboard }) => {
   return (
     <>
       <h2>Leaderboard</h2>
@@ -25,6 +27,10 @@ function Leaderboard({ leaderboard }) {
       ) : null}
     </>
   );
-}
+};
+
+Leaderboard.propTypes = {
+  leaderboard: PropTypes.array.isRequired,
+};
 
 export default Leaderboard;

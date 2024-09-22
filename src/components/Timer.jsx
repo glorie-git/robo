@@ -1,6 +1,5 @@
 import PropTypes from "prop-types";
 
-// Component to display the countdown
 function Timer({ time }) {
   return <div id="timer">Timer: {time}</div>;
 }
