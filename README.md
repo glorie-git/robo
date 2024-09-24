@@ -41,8 +41,8 @@ Help Robo navigate throught on the tabletop using the controls at the bottom. Re
 
 ![](https://github.com/glorie-git/robo/blob/main/resources/ROBOGAMEPLACE-ezgif.com-video-to-gif-converter.gif) -->
 
-## Bugs
-1. Robo flashes when going from square to square cell (this is probably because we are using a svg).
+<!-- ## Bugs
+1. Robo flashes when going from square to square cell (this is probably because we are using a svg). -->
 
 ## To-DO
 - [x] Tabletop
