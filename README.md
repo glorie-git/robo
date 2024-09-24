@@ -47,7 +47,7 @@ Help Robo navigate throught on the tabletop using the controls at the bottom. Re
 ## To-DO
 - [x] Tabletop
 - [x] Scoreboard
-- [ ] Welcome screen
+- [x] Welcome screen
 - [x] Leaderboard
 - [x] Timer
 - [ ] Multiple targets
